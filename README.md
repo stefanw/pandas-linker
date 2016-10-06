@@ -1,9 +1,14 @@
 # pandas-linker
 
-`pandas-linker` runs comparison windows over pandas DataFrame and
-links the rows via assigned UUIDs. This library does not actually do any duplicate
-detection but provides a harness to run your own comparison functions on your data.
+`pandas-linker` runs comparison windows over different sortings of a pandas DataFrame and links the rows via assigned UUIDs. This library does not actually do any duplicate detection. Instead it provides a harness to run your own comparison functions on your data.
 
+This library is meant for datasets of a size where comparing every row with every other is undesirable. Instead you can decide on a sorting order of the DataFrame and only compare every row with every other inside a sliding window.
+
+## Install
+
+```
+pip install pandas-linker
+```
 
 ## Example
 
@@ -16,7 +21,7 @@ Let's say you have a DataFrame like this:
    2  | Bart | US
    3  | Mary | US
 
-and you want to detect similar rows and mark them as such. Here's how to that:
+and you want to detect similar rows and mark them as such. Here's how to do that:
 
 ```python
 from pandas_linker import get_linker
