@@ -21,11 +21,15 @@ def get_linker(df, field=DEFAULT_MATCH_FIELD, **kwargs):
     df[field] = df[field].apply(lambda x: x if x else str(uuid.uuid4()))
 
 
-def run_linker(df, sort_cols=None, **kwargs):
+def run_linker(df, sort_cols=None, condition=None, **kwargs):
     if not df.index.is_unique:
         raise ValueError('Index of dataframe is not unique')
 
     rolling_df = df
+
+    if condition is not None:
+        rolling_df = rolling_df[condition]
+
     if sort_cols is not None:
         rolling_df = rolling_df.sort_values(sort_cols)
 
